@@ -34,7 +34,7 @@ namespace OrderItemsReserver
             }
             log.LogInformation($"orderDetail = {orderDetail}.");
 
-            byte[] byteArray = Encoding.ASCII.GetBytes(orderDetail);
+/*          byte[] byteArray = Encoding.ASCII.GetBytes(orderDetail);
             log.LogInformation($"orderJson = {orderDetail}.");
             Stream orderStream = new MemoryStream(byteArray);
             var blobClient = new BlobContainerClient(Connection, containerName);
@@ -72,19 +72,16 @@ namespace OrderItemsReserver
             {
                 log.LogInformation("file uploaded successfylly.");
                 return new OkObjectResult("file uploaded successfylly");
-            }
+            }*/
 
-
-
-            /*
             string accountEndpoint = Environment.GetEnvironmentVariable("accountEndpoint");
             string accountKey = Environment.GetEnvironmentVariable("accountKey");
             DocumentClient client = new DocumentClient(new Uri(accountEndpoint), accountKey);
             await client.CreateDatabaseIfNotExistsAsync(new Database { Id = "Orders" });
             await client.CreateDocumentCollectionIfNotExistsAsync(UriFactory.CreateDatabaseUri("Orders"), new DocumentCollection { Id = "orderDetail" });
             Order order = JsonSerializer.Deserialize<Order>(orderDetail);
-            await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri("Orders", "orderDetail"), order); 
-            */
+            await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri("Orders", "orderDetail"), order);
+            return new OkObjectResult("orderDetail saved successlly");
         }
     }
 
